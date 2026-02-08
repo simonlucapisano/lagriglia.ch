@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Griglia - Ristorante Griglieria Tradizionale</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700;900&family=Public+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --ember: #C84B31;
+            --charcoal: #2D2424;
+            --smoke: #ECDBBA;
+            --cream: #F8F4EA;
+            --wood: #8B5A3C;
+            --olive: #556B2F;
+            --accent-gold: #D4AF37;
+        }
+
+        body {
+            font-family: 'Public Sans', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: linear-gradient(180deg, rgba(45, 36, 36, 0.98) 0%, rgba(45, 36, 36, 0.92) 100%);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.2rem 5%;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--ember);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+        }
+
+
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--smoke);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ember);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--ember);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--charcoal) 0%, #3a2e2e 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(200, 75, 49, 0.03) 2px,
+                    rgba(200, 75, 49, 0.03) 4px);
+            animation: grillLines 20s linear infinite;
+        }
+
+        @keyframes grillLines {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(100px);
+            }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 7rem;
+            font-weight: 900;
+            color: var(--smoke);
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--ember);
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-tagline {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            color: var(--smoke);
+            font-style: italic;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: var(--ember);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            border-radius: 3px;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(200, 75, 49, 0.3);
+            animation: fadeInUp 1s ease-out 0.8s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .cta-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(200, 75, 49, 0.5);
+        }
+
+
+
+        /* About Section */
+        .about {
+            padding: 8rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: #4a4a4a;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-image {
+            position: relative;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 20px 20px 0 var(--ember);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--wood) 0%, var(--charcoal) 100%);
+            opacity: 0.3;
+        }
+
+        .grill-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15rem;
+            background: linear-gradient(135deg, #6b4423 0%, #3a2e2e 100%);
+        }
+
+        /* Menu Section */
+        .menu {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, var(--cream) 0%, var(--smoke) 100%);
+        }
+
+        .section-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-align: center;
+            color: var(--charcoal);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--ember);
+            margin-bottom: 5rem;
+            font-style: italic;
+        }
+
+        .menu-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .menu-category {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--ember);
+        }
+
+        .menu-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .menu-category h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.8rem;
+            padding-bottom: 1.8rem;
+            border-bottom: 1px dashed rgba(45, 36, 36, 0.15);
+        }
+
+        .menu-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .menu-item-info h4 {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--charcoal);
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-item-info p {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .menu-price {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--ember);
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 8rem 5%;
+            background: var(--charcoal);
+        }
+
+        .gallery .section-title {
+            color: var(--smoke);
+        }
+
+        .gallery .section-subtitle {
+            color: var(--ember);
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 350px;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 90, 60, 0.7) 0%, rgba(200, 75, 49, 0.5) 100%);
+            z-index: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 0.3;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(200, 75, 49, 0.4);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            background: linear-gradient(135deg, var(--wood) 0%, var(--ember) 100%);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            color: white;
+            z-index: 2;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        .gallery-caption h4 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .gallery-caption p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Reservation Section */
+        .reservation {
+            padding: 8rem 5%;
+            background: linear-gradient(135deg, var(--smoke) 0%, var(--cream) 100%);
+        }
+
+        .reservation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 4rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-family: 'Public Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--ember);
+            box-shadow: 0 0 0 3px rgba(200, 75, 49, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 1.3rem;
+            background: var(--ember);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Public Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .submit-button:hover {
+            background: #a83d28;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(200, 75, 49, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            color: var(--smoke);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ember);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--smoke);
+            text-decoration: none;
+            line-height: 2;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--ember);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(236, 219, 186, 0.2);
+            color: rgba(236, 219, 186, 0.7);
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-image {
+                height: 400px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .reservation-container {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">La Griglia</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#chi-siamo">Chi Siamo</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#galleria">Galleria</a></li>
+                <li><a href="#prenota">Prenota</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>La Griglia</h1>
+            <p class="hero-subtitle">Ristorante · Griglieria</p>
+            <p class="hero-tagline">Dove la tradizione incontra la brace</p>
+            <a href="#prenota" class="cta-button">Prenota un Tavolo</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="chi-siamo" class="about fade-in">
+        <div class="about-content">
+            <h2>La Nostra Storia</h2>
+            <p>Da tre generazioni, La Griglia porta sulle vostre tavole i sapori autentici della cucina alla griglia,
+                dove ogni piatto racconta una storia di passione e tradizione.</p>
+            <p>La nostra filosofia è semplice: ingredienti di prima qualità, cottura alla brace perfetta, e l'amore per
+                quello che facciamo. Ogni carne è selezionata con cura, ogni verdura proviene da produttori locali, e
+                ogni piatto è preparato con la dedizione che solo l'esperienza può dare.</p>
+            <p>Venite a scoprire il calore della nostra griglia e l'accoglienza della nostra famiglia.</p>
+        </div>
+        <div class="about-image">
+            <div class="grill-icon">🔥</div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <h2 class="section-title fade-in">Il Nostro Menu</h2>
+        <p class="section-subtitle fade-in">Piatti preparati con passione e serviti con il cuore</p>
+
+        <div class="menu-grid">
+            <div class="menu-category fade-in">
+                <h3>🥩 Carni alla Griglia</h3>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Tagliata di Manzo</h4>
+                        <p>Filetto di manzo alla griglia con rucola e grana</p>
+                    </div>
+                    <span class="menu-price">€24</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Costata di Vitello</h4>
+                        <p>Cottura media-sangue, con rosmarino</p>
+                    </div>
+                    <span class="menu-price">€28</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Salsiccia Artigianale</h4>
+                        <p>Salsiccia di maiale nostrana alla brace</p>
+                    </div>
+                    <span class="menu-price">€16</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Bistecca alla Fiorentina</h4>
+                        <p>1kg di pura tradizione toscana (per 2 persone)</p>
+                    </div>
+                    <span class="menu-price">€45</span>
+                </div>
+            </div>
+
+            <div class="menu-category fade-in">
+                <h3>🍗 Pollame & Agnello</h3>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Pollo alla Griglia</h4>
+                        <p>Mezzo pollo marinato con erbe aromatiche</p>
+                    </div>
+                    <span class="menu-price">€14</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Spiedini di Pollo</h4>
+                        <p>Con peperoni e cipolla caramellata</p>
+                    </div>
+                    <span class="menu-price">€15</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Costolette d'Agnello</h4>
+                        <p>Scottate alla brace con erbe di montagna</p>
+                    </div>
+                    <span class="menu-price">€22</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Hamburger La Griglia</h4>
+                        <p>300g di carne scelta con pancetta e formaggio</p>
+                    </div>
+                    <span class="menu-price">€18</span>
+                </div>
+            </div>
+
+            <div class="menu-category fade-in">
+                <h3>🥗 Contorni & Antipasti</h3>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Verdure Grigliate</h4>
+                        <p>Selezione di verdure di stagione</p>
+                    </div>
+                    <span class="menu-price">€8</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Patate al Forno</h4>
+                        <p>Croccanti e dorate con rosmarino</p>
+                    </div>
+                    <span class="menu-price">€6</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Insalata Mista</h4>
+                        <p>Verdure fresche con olio extravergine</p>
+                    </div>
+                    <span class="menu-price">€7</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Bruschetta Tradizionale</h4>
+                        <p>Pomodoro, basilico e aglio su pane casereccio</p>
+                    </div>
+                    <span class="menu-price">€9</span>
+                </div>
+            </div>
+
+            <div class="menu-category fade-in">
+                <h3>🍰 Dolci & Bevande</h3>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Tiramisù della Casa</h4>
+                        <p>Ricetta tradizionale fatta in casa</p>
+                    </div>
+                    <span class="menu-price">€7</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Panna Cotta</h4>
+                        <p>Con coulis di frutti di bosco</p>
+                    </div>
+                    <span class="menu-price">€6</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Vini Selezionati</h4>
+                        <p>Ampia carta dei vini regionali</p>
+                    </div>
+                    <span class="menu-price">Da €15</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-item-info">
+                        <h4>Caffè & Digestivi</h4>
+                        <p>Espresso, amaro, grappa</p>
+                    </div>
+                    <span class="menu-price">€3-€8</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galleria" class="gallery">
+        <h2 class="section-title fade-in">La Nostra Cucina</h2>
+        <p class="section-subtitle fade-in">Ogni piatto è un'opera d'arte</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">🥩</div>
+                <div class="gallery-caption">
+                    <h4>Tagliata Perfetta</h4>
+                    <p>Cotta alla perfezione sulla nostra griglia</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">🔥</div>
+                <div class="gallery-caption">
+                    <h4>La Nostra Griglia</h4>
+                    <p>Dove la magia prende vita</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">🍖</div>
+                <div class="gallery-caption">
+                    <h4>Costata Succulenta</h4>
+                    <p>Tenerezza e sapore in ogni boccone</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">🥗</div>
+                <div class="gallery-caption">
+                    <h4>Verdure Fresche</h4>
+                    <p>Dal produttore alla tua tavola</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">🍗</div>
+                <div class="gallery-caption">
+                    <h4>Pollo alla Brace</h4>
+                    <p>Marinato con erbe aromatiche</p>
+                </div>
+            </div>
+            <div class="gallery-item fade-in">
+                <div class="gallery-placeholder">🍷</div>
+                <div class="gallery-caption">
+                    <h4>Vini Selezionati</h4>
+                    <p>L'accompagnamento perfetto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="prenota" class="reservation">
+        <h2 class="section-title fade-in">Prenota il Tuo Tavolo</h2>
+        <p class="section-subtitle fade-in">Vieni a trovarci, ti aspettiamo!</p>
+
+        <div class="reservation-container fade-in">
+            <form id="reservationForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nome">Nome *</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cognome">Cognome *</label>
+                        <input type="text" id="cognome" name="cognome" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Telefono *</label>
+                        <input type="tel" id="telefono" name="telefono" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="data">Data *</label>
+                        <input type="date" id="data" name="data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ora">Ora *</label>
+                        <input type="time" id="ora" name="ora" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="persone">Numero di Persone *</label>
+                    <select id="persone" name="persone" required>
+                        <option value="">Seleziona...</option>
+                        <option value="1">1 persona</option>
+                        <option value="2">2 persone</option>
+                        <option value="3">3 persone</option>
+                        <option value="4">4 persone</option>
+                        <option value="5">5 persone</option>
+                        <option value="6">6 persone</option>
+                        <option value="7+">7+ persone</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Note Speciali</label>
+                    <textarea id="note" name="note"
+                        placeholder="Allergie, preferenze, occasioni speciali..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">Conferma Prenotazione</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>La Griglia</h3>
+                <p>Ristorante e Griglieria Tradizionale</p>
+                <p>Dal 1975 portiamo sulle vostre tavole i sapori autentici della cucina alla griglia.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contatti</h3>
+                <p>📍 Via della Brace 42, 00100 Roma</p>
+                <p>📞 +39 06 1234 5678</p>
+                <p>✉️ info@lagriglia.it</p>
+            </div>
+            <div class="footer-section">
+                <h3>Orari</h3>
+                <p>Martedì - Domenica</p>
+                <p>Pranzo: 12:00 - 15:00</p>
+                <p>Cena: 19:00 - 23:00</p>
+                <p>Lunedì: Chiuso</p>
+            </div>
+            <div class="footer-section">
+                <h3>Social</h3>
+                <p><a href="#">Facebook</a></p>
+                <p><a href="#">Instagram</a></p>
+                <p><a href="#">TripAdvisor</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 La Griglia. Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        document.getElementById('reservationForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Show confirmation
+            alert(`Grazie ${data.nome}! La tua prenotazione per ${data.persone} persone il ${data.data} alle ore ${data.ora} è stata ricevuta. Ti contatteremo presto per confermare.`);
+
+            // Reset form
+            this.reset();
+        });
+
+        // Set minimum date to today
+        const dateInput = document.getElementById('data');
+        const today = new Date().toISOString().split('T')[0];
+        dateInput.setAttribute('min', today);
+    </script>
+</body>
+
+</html>
