@@ -175,18 +175,21 @@
             transform: translateY(-2px);
         }
 
-        /* Image Grid Section */
+        /* Image Grid Section (Full Width) */
         .image-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
+            width: 100%;
+            height: 60vh;
+            /* Taller visual break */
+            overflow: hidden;
+            position: relative;
         }
 
-        .grid-item {
-            position: relative;
-            height: 400px;
-            overflow: hidden;
-            background: var(--secondary);
+        .grid-item.full-width {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
 
         .grid-placeholder {
@@ -195,91 +198,129 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 6rem;
-            background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-            /* Dark gradient */
-            transition: transform 0.5s ease;
+            font-size: 8rem;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%231e1e1e" width="1200" height="800"/><circle cx="600" cy="400" r="300" fill="%232d2d2d" opacity="0.5"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* Parallax effect */
         }
 
-        .grid-item:hover .grid-placeholder {
-            transform: scale(1.1);
-        }
-
-        /* Info Section */
-        .info-section {
-            padding: 6rem 5%;
+        /* Info Section (Minimal) */
+        .info-section-minimal {
+            padding: 2rem 5%;
             background: var(--primary);
-            color: var(--text-main);
-        }
-
-        .info-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
         }
 
-        .info-box h3 {
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
             font-family: 'Lato', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: var(--white);
-            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
-        .info-box p {
-            font-size: 1rem;
+        .info-bar a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .info-bar a:hover {
+            color: var(--accent);
+        }
+
+        .separator {
+            color: var(--accent);
+        }
+
+        /* About Section (Split Layout) */
+        .about-split {
+            display: flex;
+            min-height: 80vh;
+            background: var(--secondary);
+        }
+
+        .about-image-side,
+        .about-text-side {
+            flex: 1;
+            /* 50% width each */
+        }
+
+        .about-image-side {
+            position: relative;
+            min-height: 400px;
+            background: #3e3e3e;
+            /* Placeholder */
+        }
+
+        .about-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1200"><rect fill="%232d2d2d" width="800" height="1200"/><rect x="100" y="100" width="600" height="1000" fill="none" stroke="%233e3e3e" stroke-width="20"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .about-text-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5rem 8%;
+            text-align: left;
+        }
+
+        .about-text-side h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 2rem;
+            line-height: 1.1;
+        }
+
+        .about-text-side p {
+            font-family: 'Lora', serif;
+            font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-
-        .info-box a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .info-box a:hover {
-            opacity: 0.8;
-            text-decoration: underline;
-        }
-
-        /* About Section */
-        .about {
-            padding: 8rem 5%;
-            background: var(--secondary);
-            /* Darker distinctive background */
-            color: var(--text-main);
-        }
-
-        .about-container {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-container h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            /* Larger heading */
-            font-weight: 700;
-            color: var(--white);
             margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
         }
 
-        .about-container p {
-            font-family: 'Lora', serif;
-            font-size: 1.2rem;
-            line-height: 2;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
+        /* Responsive Split */
+        @media (max-width: 968px) {
+            .about-split {
+                flex-direction: column;
+            }
+
+            .about-image-side {
+                height: 50vh;
+            }
+
+            .info-bar {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .separator {
+                display: none;
+            }
+
+            .about-text-side h2 {
+                font-size: 2.5rem;
+            }
         }
 
         .cta-secondary {
@@ -305,72 +346,111 @@
             color: var(--primary);
         }
 
-        /* Happenings Section */
+        /* Happenings Section (Asymmetrical / Magazine Layout) */
         .happenings {
-            padding: 6rem 5%;
+            padding: 0;
             background: var(--primary);
             color: var(--text-main);
         }
 
         .section-title {
+            padding: 6rem 0 3rem;
             font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 700;
             text-align: center;
             color: var(--white);
-            margin-bottom: 4rem;
+            margin-bottom: 0;
             text-transform: uppercase;
             letter-spacing: 4px;
+            background: var(--primary);
         }
 
         .happenings-grid {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
         }
 
         .happening-card {
+            display: flex;
+            min-height: 60vh;
+            width: 100%;
             background: var(--secondary);
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: none;
         }
 
         .happening-card:hover {
-            transform: translateY(-5px);
+            transform: none;
+        }
+
+        .happening-card:nth-child(even) {
+            flex-direction: row-reverse;
+            background: var(--primary);
         }
 
         .happening-image {
-            width: 100%;
-            height: 300px;
+            flex: 1;
+            height: auto;
+            min-height: 400px;
             background: #3e3e3e;
-            /* Placeholder gray */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 5rem;
-            margin-bottom: 2rem;
+            font-size: 6rem;
+            margin-bottom: 0;
         }
 
         .happening-content {
-            padding: 0 2rem 3rem;
-            text-align: center;
+            flex: 1;
+            padding: 5rem 8%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
         }
 
         .happening-content h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 1rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
         .happening-content p {
-            font-size: 1rem;
+            font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-muted);
             margin-bottom: 2rem;
+            font-family: 'Lora', serif;
+        }
+
+        /* Responsive Happenings */
+        @media (max-width: 968px) {
+
+            .happening-card,
+            .happening-card:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .happening-image {
+                min-height: 300px;
+                height: 300px;
+            }
+
+            .happening-content {
+                padding: 3rem 5%;
+                text-align: center;
+            }
+
+            .happening-content h3 {
+                font-size: 2rem;
+            }
         }
 
         /* Menu Section */
@@ -380,7 +460,8 @@
         }
 
         .menu-container {
-            max-width: 1000px;
+            max-width: 1400px;
+            /* Wider layout */
             margin: 0 auto;
         }
 
@@ -616,56 +697,39 @@
         </div>
     </section>
 
-    <!-- Image Grid -->
+    <!-- Image Grid (Full Width Visual Break) -->
     <section class="image-grid">
-        <div class="grid-item">
-            <div class="grid-placeholder">🥩</div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-placeholder">🔥</div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-placeholder">🍖</div>
-        </div>
-    </section>
-
-    <!-- Info Section -->
-    <section class="info-section" id="contatti">
-        <div class="info-container">
-            <div class="info-box">
-                <h3>Indirizzo</h3>
-                <p>Via San Gottardo 8</p>
-                <p>6807 Taverne</p>
-                <p><a href="https://maps.google.com" target="_blank">Indicazioni</a></p>
-            </div>
-            <div class="info-box">
-                <h3>Orari</h3>
-                <p><strong>Pranzo - Cena</strong></p>
-                <p>Lunedi - Venerdi</p>
-                <p>12:00 - 14:00 | 18:00 - 24:00</p>
-                <p><strong>Cena Weekend</strong></p>
-                <p>Sabato</p>
-                <p>18:00 - 24:00</p>
-            </div>
-            <div class="info-box">
-                <h3>Contatti</h3>
-                <p><a href="tel:+41919451158">091 945 11 58</a></p>
-                <p><a href="mailto:social@lagriglia.ch">social@lagriglia.ch</a></p>
+        <div class="grid-item full-width">
+            <div class="grid-placeholder fa-parallax">
+                <span style="z-index: 2;">🔥</span>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about">
-        <div class="about-container">
-            <h2>La Griglia</h2>
-            <p>Dal 1975, La Griglia porta sulle vostre tavole i sapori autentici della cucina alla griglia. La nostra
-                filosofia è semplice: ingredienti di prima qualità, cottura perfetta, e l'amore per quello che facciamo.
-            </p>
-            <p>Ogni carne è selezionata con cura dai migliori allevatori locali, ogni verdura proviene da produttori di
-                fiducia, e ogni piatto è preparato con la dedizione che solo tre generazioni di esperienza possono dare.
-            </p>
-            <a href="#menu" class="cta-secondary">Scopri il Menu</a>
+    <!-- Info Section (Simplified) -->
+    <section class="info-section-minimal" id="contatti">
+        <div class="info-bar">
+            <span>Via San Gottardo 8, 6807 Taverne</span>
+            <span class="separator">•</span>
+            <span><a href="tel:+41919451158">091 945 11 58</a></span>
+            <span class="separator">•</span>
+            <span><a href="mailto:social@lagriglia.ch">social@lagriglia.ch</a></span>
+        </div>
+    </section>
+
+    <!-- About Section (Split Layout) -->
+    <section class="about-split">
+        <div class="about-image-side">
+            <!-- Placeholder for a chef or grill image -->
+            <div class="about-placeholder">👨‍🍳</div>
+        </div>
+        <div class="about-text-side">
+            <h2>La Nostra Storia</h2>
+            <p>Dal 1975, La Griglia porta sulle vostre tavole i sapori autentici. Non è solo cucina, è un rituale: il
+                fuoco, la brace, il tempo.</p>
+            <p>Selezioniamo personalmente ogni taglio dai migliori allevatori locali. La nostra filosofia è semplice:
+                rispetto per la materia prima e passione per l'ospitalità.</p>
+            <a href="#menu" class="cta-secondary">Esplora il Menu</a>
         </div>
     </section>
 
